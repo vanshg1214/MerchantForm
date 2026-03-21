@@ -65,10 +65,10 @@ function App() {
 
       <div className="container animate-fade-in">
         <div className="logo-wrapper delay-1">
-          <img src="/icons/icon.jpg" alt="VCB Logo" className="logo-img" />
+          <img src="/icons/icon.jpg" alt="Pollito chicken Fingers Logo" className="logo-img" />
         </div>
         
-        <h1 className="title delay-2">VCB Services</h1>
+        <h1 className="title delay-2">POLLITO CHICKEN FINGERS</h1>
         <p className="subtitle delay-3">
           Access instantly from your home screen for a seamless, fast experience.
         </p>
@@ -79,10 +79,7 @@ function App() {
             Download App
           </button>
 
-          <button className="btn btn-secondary" onClick={handleRedirect} style={{ background: 'transparent', border: 'none', fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '0.8rem', opacity: 0.6 }}>
-            <span>Continue to Website</span>
-            <ArrowRight size={16} />
-          </button>
+
         </div>
 
         {isIOS && !isAppInstalled && <IOSInstructions />}

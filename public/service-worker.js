@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vcb-pwa-cache-v1';
+const CACHE_NAME = 'hambre-pwa-cache-v1';
 const OFFLINE_URL = '/';
 
 const STATIC_ASSETS = [

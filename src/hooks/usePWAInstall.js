@@ -6,7 +6,8 @@ export const usePWAInstall = () => {
   const [isIOS] = useState(() => {
     if (typeof window === 'undefined') return false;
     const userAgent = window.navigator.userAgent.toLowerCase();
-    return /iphone|ipad|ipod/.test(userAgent);
+    const isIPad = (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    return /iphone|ipad|ipod/.test(userAgent) || isIPad;
   });
 
   const [isAppInstalled, setIsAppInstalled] = useState(() => {

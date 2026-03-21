@@ -1,9 +1,10 @@
 {
-  "name": "VCB Services",
-  "short_name": "VCB",
-  "description": "Access VCB Services instantly from your home screen.",
+  "name": "Hambre",
+  "short_name": "Hambre",
+  "description": "Access Hambre instantly from your home screen.",
   "start_url": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#1C1917",
   "theme_color": "#EAB308",
   "icons": [
