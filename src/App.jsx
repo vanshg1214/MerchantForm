@@ -68,7 +68,7 @@ function App() {
           <img src="/icons/app-icon.png" alt="Hambre Logo" className="logo-img" />
         </div>
         
-        <h1 className="title delay-2">ENTREGA INMEDIATE</h1>
+        <h1 className="title delay-2">Hambre Sucks</h1>
         <p className="subtitle delay-3">
           Access instantly from your home screen for a seamless, fast experience.
         </p>
