@@ -65,7 +65,7 @@ function App() {
 
       <div className="container animate-fade-in">
         <div className="logo-wrapper delay-1">
-          <img src="/icons/app-icon.png" alt="RIQUEZA Logo" className="logo-img" />
+          <img src="/icons/2.png" alt="RIQUEZA Logo" className="logo-img" />
         </div>
         
         <h1 className="title delay-2">RIQUEZA</h1>
