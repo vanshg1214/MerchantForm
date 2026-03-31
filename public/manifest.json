@@ -1,7 +1,7 @@
 {
-  "name": "Hambre Sucks",
-  "short_name": "Hambre Sucks",
-  "description": "Access Hambre Sucks instantly from your home screen.",
+  "name": "RIQUEZA",
+  "short_name": "RIQUEZA",
+  "description": "Access RIQUEZA instantly from your home screen.",
   "start_url": "/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],
