@@ -1,7 +1,7 @@
 {
-  "name": "RIQUEZA",
-  "short_name": "RIQUEZA",
-  "description": "Access RIQUEZA instantly from your home screen.",
+  "name": "Delivery Request",
+  "short_name": "Delivery",
+  "description": "Schedule your parcel delivery easily.",
   "start_url": "/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],

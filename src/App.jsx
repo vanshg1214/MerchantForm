@@ -1,61 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
-import { usePWAInstall } from './hooks/usePWAInstall';
-import { InstallBanner } from './components/InstallBanner';
-import { IOSInstructions } from './components/IOSInstructions';
-import { Download, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { DeliveryForm } from './components/DeliveryForm';
 import './index.css';
 
 function App() {
-  const { deferredPrompt, isAppInstalled, isIOS, installApp } = usePWAInstall();
-  const [showInstallBanner, setShowInstallBanner] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
-  const targetUrl = 'https://www.csnow.xyz';
-
-  const handleRedirect = useCallback(() => {
-    if (isRedirecting) return;
-    setIsRedirecting(true);
-    setTimeout(() => {
-      window.location.href = targetUrl;
-    }, 800);
-  }, [isRedirecting, targetUrl]);
-
-  const handleInstallAction = async () => {
-    if (deferredPrompt) {
-      await installApp();
-      setShowInstallBanner(false);
-    } else if (isIOS) {
-      // Scroll to instructions
-      const contactInfo = document.querySelector('.ios-instruction');
-      if (contactInfo) {
-        contactInfo.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      // Fallback: If no install prompt is available, just redirect to site
-      handleRedirect();
-    }
-  };
-
-  useEffect(() => {
-    // If the app is already installed, or opened in standalone mode, redirect automatically
-    if (isAppInstalled) {
-      setTimeout(handleRedirect, 0);
-    }
-  }, [isAppInstalled, handleRedirect]);
-
-  useEffect(() => {
-    // Show install banner if prompt is available, and hasn't been dismissed in this session
-    if (deferredPrompt && !sessionStorage.getItem('bannerDismissed')) {
-      const timer = setTimeout(() => {
-        setShowInstallBanner(true);
-      }, 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [deferredPrompt]);
-
-  const dismissBanner = () => {
-    setShowInstallBanner(false);
-    sessionStorage.setItem('bannerDismissed', 'true');
-  };
 
   return (
     <>
@@ -64,32 +12,13 @@ function App() {
       </div>
 
       <div className="container animate-fade-in">
-        <div className="logo-wrapper delay-1">
-          <img src="/icons/2.png" alt="RIQUEZA Logo" className="logo-img" />
-        </div>
-        
-        <h1 className="title delay-2">RIQUEZA</h1>
-        <p className="subtitle delay-3">
-          Accede instantáneamente desde tu pantalla de inicio para una experiencia rápida y sin interrupciones.
+        <h1 className="title delay-1">Delivery Request</h1>
+        <p className="subtitle delay-2">
+          Please fill out the details below to schedule your delivery.
         </p>
 
-        <div className="button-group delay-3">
-          <button className="btn btn-primary" onClick={handleInstallAction}>
-            <Download size={20} />
-            Download App
-          </button>
-
-
-        </div>
-
-        {isIOS && !isAppInstalled && <IOSInstructions />}
+        <DeliveryForm />
       </div>
-
-      <InstallBanner 
-        show={showInstallBanner && !isIOS} 
-        onInstall={handleInstallAction} 
-        onDismiss={dismissBanner} 
-      />
     </>
   );
 }
