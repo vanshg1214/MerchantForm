@@ -1,7 +1,7 @@
 {
-  "name": "Delivery Request",
-  "short_name": "Delivery",
-  "description": "Schedule your parcel delivery easily.",
+  "name": "Solicitud de Entrega",
+  "short_name": "Entrega",
+  "description": "Programe la entrega de su paquete fácilmente.",
   "start_url": "/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],
