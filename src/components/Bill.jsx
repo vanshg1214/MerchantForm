@@ -24,7 +24,7 @@ export const Bill = ({ data, onReset }) => {
       <div className="bill-card" id="printable-bill">
         <div className="bill-header">
           <div className="brand">
-            <h1 className="bill-logo">RIQUEZA</h1>
+            <h1 className="bill-logo">HAMBRE SUCKS</h1>
             <p className="bill-tagline">Premium Logistics & Delivery</p>
           </div>
           <div className="bill-meta">
@@ -44,6 +44,7 @@ export const Bill = ({ data, onReset }) => {
             <div className="bill-col">
               <h3>Sender Information</h3>
               <p><strong>{data.senderName}</strong></p>
+              <p><strong>Merchant A/C:</strong> {data.merchantAccountNumber}</p>
               <p>{data.senderPhone}</p>
               <p className="address-text">{data.senderAddress}</p>
             </div>
@@ -58,19 +59,29 @@ export const Bill = ({ data, onReset }) => {
           <div className="bill-divider"></div>
 
           <div className="bill-section">
-            <h3>Parcel Details</h3>
+            <h3>Pickup & Delivery Schedule</h3>
+            <div className="detail-row">
+              <span className="label">Pickup Type:</span>
+              <span className="value" style={{ color: data.pickupType === 'now' ? '#DC2626' : 'inherit', fontWeight: 'bold' }}>
+                {data.pickupType === 'now' ? 'IMMEDIATE / NOW' : 'SCHEDULED'}
+              </span>
+            </div>
             <div className="detail-row">
               <span className="label">Description:</span>
               <span className="value">{data.description}</span>
             </div>
-            <div className="detail-row">
-              <span className="label">Scheduled Date:</span>
-              <span className="value">{data.deliveryDate}</span>
-            </div>
-            <div className="detail-row">
-              <span className="label">Scheduled Time:</span>
-              <span className="value">{data.deliveryTime}</span>
-            </div>
+            {data.pickupType === 'scheduled' && (
+              <>
+                <div className="detail-row">
+                  <span className="label">Scheduled Date:</span>
+                  <span className="value">{data.deliveryDate}</span>
+                </div>
+                <div className="detail-row">
+                  <span className="label">Scheduled Time:</span>
+                  <span className="value">{data.deliveryTime}</span>
+                </div>
+              </>
+            )}
           </div>
 
           <div className="bill-divider"></div>
@@ -104,7 +115,7 @@ export const Bill = ({ data, onReset }) => {
 
         <div className="bill-disclaimer">
           <p>This is a computer-generated document. No signature is required.</p>
-          <p>© 2024 RIQUEZA Logistics. All rights reserved.</p>
+          <p>© 2024 HAMBRE SUCKS Logistics. All rights reserved.</p>
         </div>
       </div>
 

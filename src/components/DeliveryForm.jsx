@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { User, MapPin, Phone, FileText, Calendar, Clock, Send } from 'lucide-react';
+import { User, MapPin, Phone, FileText, Calendar, Clock, Send, CreditCard, Zap, Truck, Headphones, Package } from 'lucide-react';
 import { Bill } from './Bill';
 
 export const DeliveryForm = () => {
@@ -14,6 +14,8 @@ export const DeliveryForm = () => {
     description: '',
     deliveryDate: '',
     deliveryTime: '',
+    merchantAccountNumber: '',
+    pickupType: 'now', // 'now' or 'scheduled'
   });
 
   const handleChange = (e) => {
@@ -39,6 +41,8 @@ export const DeliveryForm = () => {
       description: '',
       deliveryDate: '',
       deliveryTime: '',
+      merchantAccountNumber: '',
+      pickupType: 'now',
     });
   };
 
@@ -50,6 +54,21 @@ export const DeliveryForm = () => {
     <form className="delivery-form animate-fade-in" onSubmit={handleSubmit}>
       <div className="form-section">
         <h3 className="section-title"><User size={18} /> Sender Information</h3>
+        <div className="input-group">
+          <label htmlFor="merchantAccountNumber">Merchant Account Number</label>
+          <div className="input-with-icon">
+            <CreditCard size={16} className="field-icon" />
+            <input
+              type="text"
+              id="merchantAccountNumber"
+              name="merchantAccountNumber"
+              placeholder="Enter merchant account number"
+              value={formData.merchantAccountNumber}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
         <div className="input-group">
           <label htmlFor="senderName">Full Name</label>
           <input
@@ -134,53 +153,83 @@ export const DeliveryForm = () => {
 
       <div className="form-section">
         <h3 className="section-title"><FileText size={18} /> Delivery Details</h3>
+        
         <div className="input-group">
           <label htmlFor="description">Parcel Description</label>
           <textarea
             id="description"
             name="description"
-            placeholder="What are you sending?"
+            placeholder="What are we picking up and delivering?"
             value={formData.description}
             onChange={handleChange}
             required
           />
         </div>
 
-        <div className="input-row split">
-          <div className="input-group">
-            <label htmlFor="deliveryDate">Preferred Date</label>
-            <div className="input-with-icon">
-              <Calendar size={16} className="field-icon" />
-              <input
-                type="date"
-                id="deliveryDate"
-                name="deliveryDate"
-                value={formData.deliveryDate}
-                onChange={handleChange}
-                required
-              />
+        <div className="input-group">
+          <label>When should we start the pickup?</label>
+          <div className="pickup-toggle-group">
+            <button
+              type="button"
+              className={`toggle-btn ${formData.pickupType === 'now' ? 'active' : ''}`}
+              onClick={() => setFormData(prev => ({ ...prev, pickupType: 'now' }))}
+            >
+              <Zap size={16} /> Pick up NOW
+            </button>
+            <button
+              type="button"
+              className={`toggle-btn ${formData.pickupType === 'scheduled' ? 'active' : ''}`}
+              onClick={() => setFormData(prev => ({ ...prev, pickupType: 'scheduled' }))}
+            >
+              <Calendar size={16} /> Schedule Later
+            </button>
+          </div>
+        </div>
+
+        {formData.pickupType === 'scheduled' && (
+          <div className="input-row split animate-slide-down">
+            <div className="input-group">
+              <label htmlFor="deliveryDate">Preferred Date</label>
+              <div className="input-with-icon">
+                <Calendar size={16} className="field-icon" />
+                <input
+                  type="date"
+                  id="deliveryDate"
+                  name="deliveryDate"
+                  value={formData.deliveryDate}
+                  onChange={handleChange}
+                  required={formData.pickupType === 'scheduled'}
+                />
+              </div>
+            </div>
+            <div className="input-group">
+              <label htmlFor="deliveryTime">Preferred Time</label>
+              <div className="input-with-icon">
+                <Clock size={16} className="field-icon" />
+                <input
+                  type="time"
+                  id="deliveryTime"
+                  name="deliveryTime"
+                  value={formData.deliveryTime}
+                  onChange={handleChange}
+                  required={formData.pickupType === 'scheduled'}
+                />
+              </div>
             </div>
           </div>
-          <div className="input-group">
-            <label htmlFor="deliveryTime">Preferred Time</label>
-            <div className="input-with-icon">
-              <Clock size={16} className="field-icon" />
-              <input
-                type="time"
-                id="deliveryTime"
-                name="deliveryTime"
-                value={formData.deliveryTime}
-                onChange={handleChange}
-                required
-              />
-            </div>
-          </div>
+        )}
+      </div>
+
+      <div className="form-footer-info">
+        <div className="contact-support">
+          <Headphones size={18} />
+          <span>Need help or want to cancel? Call Support: <strong>+1 (800) HAMBRE-SUCKS</strong></span>
         </div>
       </div>
 
-      <button type="submit" className="btn btn-primary submit-btn">
-        <Send size={18} />
-        Generate Bill
+      <button type="submit" className="btn btn-primary submit-btn start-pickup-btn">
+        <Truck size={20} />
+        {formData.pickupType === 'now' ? 'Start Pickup NOW' : 'Schedule Pickup'}
       </button>
     </form>
   );
