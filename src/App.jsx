@@ -12,9 +12,9 @@ function App() {
       </div>
 
       <div className="container animate-fade-in">
-        <h1 className="title delay-1">Solicitud de Entrega</h1>
+        <h1 className="title delay-1">Delivery Request</h1>
         <p className="subtitle delay-2">
-          Por favor, complete los detalles a continuación para programar su entrega.
+          Please complete the details below to schedule your delivery.
         </p>
 
         <DeliveryForm />

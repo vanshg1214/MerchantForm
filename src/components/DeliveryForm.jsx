@@ -15,6 +15,7 @@ export const DeliveryForm = () => {
     deliveryDate: '',
     deliveryTime: '',
     merchantAccountNumber: '',
+    driverNumber: '',
     pickupType: 'now', // 'now' or 'scheduled'
   });
 
@@ -42,6 +43,7 @@ export const DeliveryForm = () => {
       deliveryDate: '',
       deliveryTime: '',
       merchantAccountNumber: '',
+      driverNumber: '',
       pickupType: 'now',
     });
   };
@@ -53,16 +55,16 @@ export const DeliveryForm = () => {
   return (
     <form className="delivery-form animate-fade-in" onSubmit={handleSubmit}>
       <div className="form-section">
-        <h3 className="section-title"><User size={18} /> Información del Remitente</h3>
+        <h3 className="section-title"><User size={18} /> Sender Information</h3>
         <div className="input-group">
-          <label htmlFor="merchantAccountNumber">Número de Cuenta del Comerciante</label>
+          <label htmlFor="merchantAccountNumber">Merchant Account Number</label>
           <div className="input-with-icon">
             <CreditCard size={16} className="field-icon" />
             <input
               type="text"
               id="merchantAccountNumber"
               name="merchantAccountNumber"
-              placeholder="Ingrese el número de cuenta del comerciante"
+              placeholder="Enter the merchant's account number"
               value={formData.merchantAccountNumber}
               onChange={handleChange}
               required
@@ -70,19 +72,34 @@ export const DeliveryForm = () => {
           </div>
         </div>
         <div className="input-group">
-          <label htmlFor="senderName">Nombre Completo</label>
+          <label htmlFor="driverNumber">Driver number</label>
+          <div className="input-with-icon">
+            <User size={16} className="field-icon" />
+            <input
+              type="text"
+              id="driverNumber"
+              name="driverNumber"
+              placeholder="ID of assigned driver"
+              value={formData.driverNumber}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+        <div className="input-group">
+          <label htmlFor="senderName">Full Name</label>
           <input
             type="text"
             id="senderName"
             name="senderName"
-            placeholder="Ingrese el nombre del remitente"
+            placeholder="Enter the sender's name"
             value={formData.senderName}
             onChange={handleChange}
             required
           />
         </div>
         <div className="input-group">
-          <label htmlFor="senderPhone">Número de Teléfono</label>
+          <label htmlFor="senderPhone">Phone number</label>
           <div className="input-with-icon">
             <Phone size={16} className="field-icon" />
             <input
@@ -97,11 +114,11 @@ export const DeliveryForm = () => {
           </div>
         </div>
         <div className="input-group">
-          <label htmlFor="senderAddress">Dirección</label>
+          <label htmlFor="senderAddress">Address</label>
           <textarea
             id="senderAddress"
             name="senderAddress"
-            placeholder="Calle, Ciudad, Estado, Código Postal"
+            placeholder="Street, City, State, Zip Code"
             value={formData.senderAddress}
             onChange={handleChange}
             required
@@ -110,21 +127,21 @@ export const DeliveryForm = () => {
       </div>
 
       <div className="form-section">
-        <h3 className="section-title"><MapPin size={18} /> Información del Destinatario</h3>
+        <h3 className="section-title"><MapPin size={18} /> Recipient Information</h3>
         <div className="input-group">
-          <label htmlFor="recipientName">Nombre Completo</label>
+          <label htmlFor="recipientName">Full Name</label>
           <input
             type="text"
             id="recipientName"
             name="recipientName"
-            placeholder="Ingrese el nombre del destinatario"
+            placeholder="Enter the recipient's name"
             value={formData.recipientName}
             onChange={handleChange}
             required
           />
         </div>
         <div className="input-group">
-          <label htmlFor="recipientPhone">Número de Teléfono</label>
+          <label htmlFor="recipientPhone">Phone number</label>
           <div className="input-with-icon">
             <Phone size={16} className="field-icon" />
             <input
@@ -139,11 +156,11 @@ export const DeliveryForm = () => {
           </div>
         </div>
         <div className="input-group">
-          <label htmlFor="recipientAddress">Dirección</label>
+          <label htmlFor="recipientAddress">Address</label>
           <textarea
             id="recipientAddress"
             name="recipientAddress"
-            placeholder="Calle, Ciudad, Estado, Código Postal"
+            placeholder="Street, City, State, Zip Code"
             value={formData.recipientAddress}
             onChange={handleChange}
             required
@@ -152,14 +169,14 @@ export const DeliveryForm = () => {
       </div>
 
       <div className="form-section">
-        <h3 className="section-title"><FileText size={18} /> Detalles de la Entrega</h3>
+        <h3 className="section-title"><FileText size={18} /> Delivery Details</h3>
         
         <div className="input-group">
-          <label htmlFor="description">Descripción del Paquete</label>
+          <label htmlFor="description">Package Description</label>
           <textarea
             id="description"
             name="description"
-            placeholder="¿Qué estamos recogiendo y entregando?"
+            placeholder="What are we picking up and delivering?"
             value={formData.description}
             onChange={handleChange}
             required
@@ -167,21 +184,21 @@ export const DeliveryForm = () => {
         </div>
 
         <div className="input-group">
-          <label>¿Cuándo deberíamos comenzar la recogida?</label>
+          <label>When should we start the pickup?</label>
           <div className="pickup-toggle-group">
             <button
               type="button"
               className={`toggle-btn ${formData.pickupType === 'now' ? 'active' : ''}`}
               onClick={() => setFormData(prev => ({ ...prev, pickupType: 'now' }))}
             >
-              <Zap size={16} /> Recoger AHORA
+              <Zap size={16} /> Pickup NOW
             </button>
             <button
               type="button"
               className={`toggle-btn ${formData.pickupType === 'scheduled' ? 'active' : ''}`}
               onClick={() => setFormData(prev => ({ ...prev, pickupType: 'scheduled' }))}
             >
-              <Calendar size={16} /> Programar para Después
+              <Calendar size={16} /> Schedule for Later
             </button>
           </div>
         </div>
@@ -189,7 +206,7 @@ export const DeliveryForm = () => {
         {formData.pickupType === 'scheduled' && (
           <div className="input-row split animate-slide-down">
             <div className="input-group">
-              <label htmlFor="deliveryDate">Fecha Preferida</label>
+              <label htmlFor="deliveryDate">Preferred Date</label>
               <div className="input-with-icon">
                 <Calendar size={16} className="field-icon" />
                 <input
@@ -203,7 +220,7 @@ export const DeliveryForm = () => {
               </div>
             </div>
             <div className="input-group">
-              <label htmlFor="deliveryTime">Hora Preferida</label>
+              <label htmlFor="deliveryTime">Preferred Time</label>
               <div className="input-with-icon">
                 <Clock size={16} className="field-icon" />
                 <input
@@ -223,13 +240,13 @@ export const DeliveryForm = () => {
       <div className="form-footer-info">
         <div className="contact-support">
           <Headphones size={18} />
-          <span>¿Necesita ayuda o desea cancelar? Llame a Soporte: <strong>+1 (800) HAMBRE-SUCKS</strong></span>
+          <span>Need help or want to cancel? Call Support: <strong>+1 (800) HAMBRE-SUCKS</strong></span>
         </div>
       </div>
 
       <button type="submit" className="btn btn-primary submit-btn start-pickup-btn">
         <Truck size={20} />
-        {formData.pickupType === 'now' ? 'Comenzar Recogida AHORA' : 'Programar Recogida'}
+        {formData.pickupType === 'now' ? 'Start Pickup NOW' : 'Schedule Pickup'}
       </button>
     </form>
   );
