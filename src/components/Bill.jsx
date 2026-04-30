@@ -16,8 +16,8 @@ export const Bill = ({ data, onReset }) => {
     <div className="bill-container animate-fade-in">
       <div className="success-header">
         <CheckCircle2 color="#22C55E" size={48} />
-        <h2>Request Successful!</h2>
-        <p>Your delivery request has been sent and your bill has been generated below.</p>
+        <h2>¡Solicitud Exitosa!</h2>
+        <p>Su solicitud de entrega ha sido enviada y su factura se ha generado a continuación.</p>
       </div>
 
       {/* The Actual Bill Card */}
@@ -25,15 +25,15 @@ export const Bill = ({ data, onReset }) => {
         <div className="bill-header">
           <div className="brand">
             <h1 className="bill-logo">HAMBRE SUCKS</h1>
-            <p className="bill-tagline">Premium Logistics & Delivery</p>
+            <p className="bill-tagline">Logística y Entrega Premium</p>
           </div>
           <div className="bill-meta">
             <div className="meta-item">
-              <span className="label">Invoice No:</span>
+              <span className="label">Nº de Factura:</span>
               <span className="value">{billNumber}</span>
             </div>
             <div className="meta-item">
-              <span className="label">Date:</span>
+              <span className="label">Fecha:</span>
               <span className="value">{today}</span>
             </div>
           </div>
@@ -42,15 +42,15 @@ export const Bill = ({ data, onReset }) => {
         <div className="bill-body">
           <div className="bill-row">
             <div className="bill-col">
-              <h3>Sender Information</h3>
+              <h3>Información del Remitente</h3>
               <p><strong>{data.senderName}</strong></p>
-              <p><strong>Merchant A/C:</strong> {data.merchantAccountNumber}</p>
-              <p><strong>Driver number:</strong> {data.driverNumber}</p>
+              <p><strong>Cta. del Comerciante:</strong> {data.merchantAccountNumber}</p>
+              <p><strong>Número del Conductor:</strong> {data.driverNumber}</p>
               <p>{data.senderPhone}</p>
               <p className="address-text">{data.senderAddress}</p>
             </div>
             <div className="bill-col">
-              <h3>Recipient Information</h3>
+              <h3>Información del Destinatario</h3>
               <p><strong>{data.recipientName}</strong></p>
               <p>{data.recipientPhone}</p>
               <p className="address-text">{data.recipientAddress}</p>
@@ -60,25 +60,25 @@ export const Bill = ({ data, onReset }) => {
           <div className="bill-divider"></div>
 
           <div className="bill-section">
-            <h3>Pickup & Delivery Schedule</h3>
+            <h3>Horario de Recolección y Entrega</h3>
             <div className="detail-row">
-              <span className="label">Pickup Type:</span>
+              <span className="label">Tipo de Recolección:</span>
               <span className="value" style={{ color: data.pickupType === 'now' ? '#DC2626' : 'inherit', fontWeight: 'bold' }}>
-                {data.pickupType === 'now' ? 'IMMEDIATE / NOW' : 'SCHEDULED'}
+                {data.pickupType === 'now' ? 'INMEDIATO / AHORA' : 'PROGRAMADO'}
               </span>
             </div>
             <div className="detail-row">
-              <span className="label">Description:</span>
+              <span className="label">Descripción:</span>
               <span className="value">{data.description}</span>
             </div>
             {data.pickupType === 'scheduled' && (
               <>
                 <div className="detail-row">
-                  <span className="label">Scheduled Date:</span>
+                  <span className="label">Fecha Programada:</span>
                   <span className="value">{data.deliveryDate}</span>
                 </div>
                 <div className="detail-row">
-                  <span className="label">Scheduled Time:</span>
+                  <span className="label">Hora Programada:</span>
                   <span className="value">{data.deliveryTime}</span>
                 </div>
               </>
@@ -90,15 +90,15 @@ export const Bill = ({ data, onReset }) => {
           <div className="bill-footer-details">
             <div className="pricing-table">
               <div className="price-row header">
-                <span>Description</span>
-                <span>Amount</span>
+                <span>Descripción</span>
+                <span>Monto</span>
               </div>
               <div className="price-row">
-                <span>Standard Delivery Service</span>
+                <span>Servicio de Entrega Estándar</span>
                 <span>$25.00</span>
               </div>
               <div className="price-row grand-total">
-                <span>Total Amount</span>
+                <span>Monto Total</span>
                 <span>$25.00</span>
               </div>
             </div>
@@ -109,25 +109,25 @@ export const Bill = ({ data, onReset }) => {
                 alt="QR Code" 
                 className="bill-qr"
               />
-              <p>Scan to track your package</p>
+              <p>Escanee para rastrear su paquete</p>
             </div>
           </div>
         </div>
 
         <div className="bill-disclaimer">
-          <p>This is a computer-generated document. No signature required.</p>
-          <p>© 2024 HAMBRE SUCKS Logistics. All rights reserved.</p>
+          <p>Este es un documento generado por computadora. No requiere firma.</p>
+          <p>© 2024 HAMBRE SUCKS Logistics. Todos los derechos reservados.</p>
         </div>
       </div>
 
       <div className="bill-actions">
         <button className="btn btn-secondary" onClick={onReset}>
           <ArrowLeft size={18} />
-          Back to Form
+          Volver al Formulario
         </button>
         <button className="btn btn-primary" onClick={handlePrint}>
           <Printer size={18} />
-          Print / Save PDF
+          Imprimir / Guardar PDF
         </button>
       </div>
     </div>
