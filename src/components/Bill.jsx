@@ -2,7 +2,7 @@ import { Printer, Download, ArrowLeft, CheckCircle2 } from 'lucide-react';
 
 export const Bill = ({ data, onReset }) => {
   const billNumber = `INV-${Math.floor(100000 + Math.random() * 900000)}`;
-  const today = new Date().toLocaleDateString('en-US', {
+  const today = new Date().toLocaleDateString('es-ES', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
